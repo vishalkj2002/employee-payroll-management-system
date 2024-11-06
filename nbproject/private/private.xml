@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vishal/Documents/Projects/Employee%20Payroll%20Management%20System/src/employee/payroll/MainMenu.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/Employee%20Payroll%20Management%20System/src/employee/payroll/db.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/Employee%20Payroll%20Management%20System/src/employee/payroll/EmployeePayrollManagementSystem.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/Employee%20Payroll%20Management%20System/src/employee/payroll/login.java</file>
+            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/MainMenu.java</file>
+            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/Emp.java</file>
+            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/addEmployee.java</file>
+            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/login.java</file>
         </group>
     </open-files>
 </project-private>
