@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -95,6 +97,8 @@ public class addEmployee extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         txt_search = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -282,14 +286,30 @@ public class addEmployee extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Cascadia Code", 0, 36)); // NOI18N
+        jButton4.setText("Delete");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Cascadia Code", 0, 36)); // NOI18N
+        jButton5.setText("Update");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +374,10 @@ public class addEmployee extends javax.swing.JFrame {
                                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -373,7 +396,7 @@ public class addEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -448,8 +471,10 @@ public class addEmployee extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -478,42 +503,80 @@ public class addEmployee extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            String sql = "INSERT INTO Staff_information "
-           + "(id, first_name, surname, Dob, Email, Telephone, Address, "
-           + "Department, Image, Salary, Gender, Address2, Post_code, Designation, Status, job_title, "
-           + "Apartment, Date_hired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // Ask for confirmation
+            int confirmation = JOptionPane.showConfirmDialog(null, "Do you want to add this record?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, Integer.parseInt(txt_id.getText()));
-            pst.setString(2, txt_firstname.getText());
-            pst.setString(3, txt_surname.getText());
-            pst.setString(4, txt_dob.getText());
-            pst.setString(5, txt_email.getText());
-            pst.setString(6, txt_contact.getText());
-            pst.setString(7, txt_address1.getText());
-            pst.setString(8, txt_department.getText());
-            pst.setBytes(9, person_image);
-            pst.setString(10, txt_basicsalary.getText());
-            pst.setString(11, gender);
-            pst.setString(12, txt_address2.getText());
-            pst.setString(13, txt_postcode.getText());
-            pst.setString(14, txt_designation.getText());
-            pst.setString(15, txt_status.getText());
-            pst.setString(16, txt_jobtitle.getText());
-            pst.setString(17, txt_house.getText());
-            pst.setString(18, txt_datehired.getText());
+            // If user clicks "Yes," proceed with the insert operation
+            if (confirmation == JOptionPane.YES_OPTION) {
+                String sql = "INSERT INTO Staff_information "
+                   + "(id, first_name, surname, Dob, Email, Telephone, Address, "
+                   + "Department, Image, Salary, Gender, Address2, Post_code, Designation, Status, job_title, "
+                   + "Apartment, Date_hired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Data is saved successfully");
+                pst = conn.prepareStatement(sql);
+                pst.setInt(1, Integer.parseInt(txt_id.getText()));
+                pst.setString(2, txt_firstname.getText());
+                pst.setString(3, txt_surname.getText());
+                pst.setString(4, txt_dob.getText());
+                pst.setString(5, txt_email.getText());
+                pst.setString(6, txt_contact.getText());
+                pst.setString(7, txt_address1.getText());
+                pst.setString(8, txt_department.getText());
+                pst.setBytes(9, person_image);
+                pst.setString(10, txt_basicsalary.getText());
+                pst.setString(11, gender);
+                pst.setString(12, txt_address2.getText());
+                pst.setString(13, txt_postcode.getText());
+                pst.setString(14, txt_designation.getText());
+                pst.setString(15, txt_status.getText());
+                pst.setString(16, txt_jobtitle.getText());
+                pst.setString(17, txt_house.getText());
+                pst.setString(18, txt_datehired.getText());
+
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data is saved successfully");
+            }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-        finally {
+        try {
+            // Query to get staff members who are not in the users table
+            String sq = "SELECT * FROM staff_information WHERE id NOT IN (SELECT id FROM users)";
+            pst = conn.prepareStatement(sq);
+            rs = pst.executeQuery();
+
+            // Loop through each staff record found
+            while (rs.next()) {
+                String empId = rs.getString("id");          // Employee ID
+                String firstName = rs.getString("first_name"); // First Name
+                String dob = rs.getString("Dob");           // Date of Birth
+                String department = rs.getString("Department"); // Department
+
+                // Remove slashes from dob to create password
+                String password = dob.replace("/", "");
+
+                // Insert into users table
+                String sql = "INSERT INTO users (division, username, password, emp_id) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement insertPst = conn.prepareStatement(sql)) {
+                    insertPst.setString(1, department);    // Division
+                    insertPst.setString(2, firstName);     // Username
+                    insertPst.setString(3, password);      // Password
+                    insertPst.setString(4, empId);         // Employee ID
+
+                    insertPst.executeUpdate();
+                }
+
+                JOptionPane.showMessageDialog(null, "User account has been created successfully:\n" +
+                                              "Username: " + firstName + "\nPassword: " + password);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
             try {
-                rs.close();
-                pst.close();
-            } catch(Exception e) {
-                JOptionPane.showMessageDialog(null,e);
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -597,42 +660,36 @@ public class addEmployee extends javax.swing.JFrame {
 
                 // If data is found, set the fields
                 if (rs.next()) {
-                    String add1 = rs.getString("id");
-                    txt_id.setText(add1);
-                    String add2 = rs.getString("first_name");
-                    txt_firstname.setText(add2);
-                    String add3 = rs.getString("surname");
-                    txt_surname.setText(add3);
-                    String add4 = rs.getString("Dob");
-                    txt_dob.setText(add4);
-                    String add5 = rs.getString("Email");
-                    txt_email.setText(add5);
-                    String add6 = rs.getString("Telephone");
-                    txt_contact.setText(add6);
-                    String add7 = rs.getString("Address");
-                    txt_address1.setText(add7);
-                    String add8 = rs.getString("Department");
-                    txt_department.setText(add8);
-                    String add10 = rs.getString("Salary");
-                    txt_basicsalary.setText(add10);
-                    String add11 = rs.getString("Address2");
-                    txt_address2.setText(add11);                
-                    String add12 = rs.getString("Apartment");
-                    txt_house.setText(add12);                
-                    String add13 = rs.getString("Post_code");
-                    txt_postcode.setText(add13);                
-                    String add14 = rs.getString("Status");
-                    txt_status.setText(add14);                
-                    String add15 = rs.getString("Date_hired");
-                    txt_datehired.setText(add15);                
-                    String add16 = rs.getString("job_title");
-                    txt_jobtitle.setText(add16);               
-                    String add17 = rs.getString("Designation");
-                    txt_designation.setText(add17);
+                    txt_id.setText(rs.getString("id"));
+                    txt_firstname.setText(rs.getString("first_name"));
+                    txt_surname.setText(rs.getString("surname"));
+                    txt_dob.setText(rs.getString("Dob"));
+                    txt_email.setText(rs.getString("Email"));
+                    txt_contact.setText(rs.getString("Telephone"));
+                    txt_address1.setText(rs.getString("Address"));
+                    txt_department.setText(rs.getString("Department"));
+                    txt_basicsalary.setText(rs.getString("Salary"));
+                    txt_address2.setText(rs.getString("Address2"));
+                    txt_house.setText(rs.getString("Apartment"));
+                    txt_postcode.setText(rs.getString("Post_code"));
+                    txt_status.setText(rs.getString("Status"));
+                    txt_datehired.setText(rs.getString("Date_hired"));
+                    txt_jobtitle.setText(rs.getString("job_title"));
+                    txt_designation.setText(rs.getString("Designation"));
 
+                    // Handle gender radio button update
+                    String gender = rs.getString("Gender");
+                    if ("Male".equalsIgnoreCase(gender)) {
+                        r_male.setSelected(true);
+                    } else if ("Female".equalsIgnoreCase(gender)) {
+                        r_female.setSelected(true);
+                    }
+
+                    // Set image if available
                     byte[] image = rs.getBytes("Image");
                     if (image != null) {
-                        ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH));
+                        ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage()
+                                .getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH));
                         img.setIcon(imageIcon);
                     }
                 } else {
@@ -652,6 +709,82 @@ public class addEmployee extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txt_searchKeyReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Ask for confirmation
+            int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this record?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+
+            // If user clicks "Yes," proceed with the delete operation
+            if (confirmation == JOptionPane.YES_OPTION) {
+                String sql = "DELETE FROM staff_information WHERE id=?";
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txt_id.getText());
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Record Deleted");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Ask for confirmation
+            int confirmation = JOptionPane.showConfirmDialog(null, "Do you want to update this record?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            // If user clicks "Yes," proceed with the update operation
+            if (confirmation == JOptionPane.YES_OPTION) {
+                String sql = "UPDATE staff_information SET "
+                           + "first_name = ?, surname = ?, Dob = ?, Email = ?, Telephone = ?, "
+                           + "Address = ?, Department = ?, Address2 = ?, Apartment = ?, Post_code = ?, "
+                           + "Designation = ?, Status = ?, Salary = ?, job_title = ?, Date_Hired = ? "
+                           + "WHERE id = ?";
+
+                pst = conn.prepareStatement(sql);
+
+                // Set the values for the placeholders in the prepared statement
+                pst.setString(1, txt_firstname.getText());
+                pst.setString(2, txt_surname.getText());
+                pst.setString(3, txt_dob.getText());
+                pst.setString(4, txt_email.getText());
+                pst.setString(5, txt_contact.getText());
+                pst.setString(6, txt_address1.getText());
+                pst.setString(7, txt_department.getText());
+                pst.setString(8, txt_address2.getText());
+                pst.setString(9, txt_house.getText());
+                pst.setString(10, txt_postcode.getText());
+                pst.setString(11, txt_designation.getText());
+                pst.setString(12, txt_status.getText());
+                pst.setString(13, txt_basicsalary.getText());
+                pst.setString(14, txt_jobtitle.getText());
+                pst.setString(15, txt_datehired.getText());
+                pst.setString(16, txt_id.getText()); // For the WHERE clause
+
+                // Execute the update
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Record Updated");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -714,6 +847,8 @@ public class addEmployee extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
