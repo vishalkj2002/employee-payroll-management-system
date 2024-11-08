@@ -4,17 +4,44 @@
  */
 package employee.payroll;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import javax.swing.JTextField;
+
 /**
  *
  * @author vishal
  */
 public class UpdateSalary extends javax.swing.JFrame {
-
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
     /**
      * Creates new form UpdateSalary
      */
     public UpdateSalary() {
         initComponents();
+        conn = db.java_db();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        //setSize(new Dimension(1500, 1000));
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
     }
 
     /**
@@ -26,21 +53,353 @@ public class UpdateSalary extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_id = new javax.swing.JTextField();
+        txt_firstname = new javax.swing.JTextField();
+        txt_surname = new javax.swing.JTextField();
+        txt_department = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_dob = new javax.swing.JTextField();
+        txt_basicsalary = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_search = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        r_percentage = new javax.swing.JRadioButton();
+        r_amount = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txt_percentage = new javax.swing.JTextField();
+        txt_amount = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 48)); // NOI18N
+        jLabel1.setText("Update Salary");
+
+        jLabel2.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel2.setText("Employee ID:");
+
+        jLabel3.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel3.setText("First Name:");
+
+        jLabel4.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel4.setText("Surname:");
+
+        txt_id.setEditable(false);
+        txt_id.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idActionPerformed(evt);
+            }
+        });
+
+        txt_firstname.setEditable(false);
+        txt_firstname.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+
+        txt_surname.setEditable(false);
+        txt_surname.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+
+        txt_department.setEditable(false);
+        txt_department.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel5.setText("Date of Birth:");
+
+        jLabel6.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel6.setText("Basic Salary:");
+
+        jLabel7.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel7.setText("Department:");
+
+        txt_dob.setEditable(false);
+        txt_dob.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        txt_dob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_dobActionPerformed(evt);
+            }
+        });
+
+        txt_basicsalary.setEditable(false);
+        txt_basicsalary.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel8.setText("Employee ID:");
+
+        txt_search.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_searchKeyReleased(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel9.setText("Update Salary by:");
+
+        r_percentage.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        r_percentage.setText("Percentage (%)");
+        r_percentage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_percentageActionPerformed(evt);
+            }
+        });
+
+        r_amount.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        r_amount.setText("Amount");
+        r_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_amountActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel10.setText("Percentage (%):");
+
+        jLabel11.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        jLabel11.setText("Amount:");
+
+        txt_percentage.setEditable(false);
+        txt_percentage.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+        txt_percentage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_percentageActionPerformed(evt);
+            }
+        });
+
+        txt_amount.setEditable(false);
+        txt_amount.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Cascadia Code", 0, 36)); // NOI18N
+        jButton1.setText("Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(567, 567, 567)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(423, 423, 423)
+                        .addComponent(jLabel8)
+                        .addGap(28, 28, 28)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(467, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(66, 66, 66)
+                                    .addComponent(r_percentage)
+                                    .addGap(117, 117, 117)
+                                    .addComponent(r_amount))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4))
+                                    .addGap(54, 54, 54)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_basicsalary, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(txt_dob, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(txt_department, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(txt_amount))))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txt_basicsalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txt_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(106, 106, 106)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(r_percentage)
+                    .addComponent(r_amount))
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(txt_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
+
+    private void txt_dobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dobActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_dobActionPerformed
+
+    private void r_percentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_percentageActionPerformed
+        // TODO add your handling code here:
+        r_percentage.setSelected(true);
+        r_amount.setSelected(false);
+        txt_amount.setEnabled(false);
+        txt_percentage.setEditable(true);
+        txt_percentage.setEnabled(true);
+        txt_amount.setText("");
+    }//GEN-LAST:event_r_percentageActionPerformed
+
+    private void r_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_amountActionPerformed
+        // TODO add your handling code here:
+        r_amount.setSelected(true);
+        r_percentage.setSelected(false);
+        txt_percentage.setEnabled(false);
+        txt_amount.setEditable(true);
+        txt_amount.setEnabled(true);
+        txt_percentage.setText("");
+    }//GEN-LAST:event_r_amountActionPerformed
+
+    private void txt_percentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_percentageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_percentageActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int salary = Integer.parseInt(txt_basicsalary.getText());
+        if(r_percentage.isSelected() == true) {
+            int getPercentage = Integer.parseInt(txt_percentage.getText());
+            int calcPercentage = salary / 100 * getPercentage + salary;
+            String xP = String.valueOf(calcPercentage);
+            txt_basicsalary.setText(xP);
+        } else if (r_amount.isSelected() == true) {
+            int getAmt = Integer.parseInt(txt_amount.getText());
+            int calcAmount = salary + getAmt;
+            String xA = String.valueOf(calcAmount);
+            txt_basicsalary.setText(xA);
+        }
+        try {
+            String value1 = txt_id.getText();
+            String value2 = txt_basicsalary.getText();
+            
+            String sql = "update staff_information set id = '"+value1+"', Salary = '"+value2+"' where id = '"+value1+"'";
+            pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Record Updated");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+                
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                // Clear previous data
+                clearFields();
+
+                // Query to fetch the data
+                String sql = "SELECT * FROM staff_information WHERE id=?";
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txt_search.getText());
+
+                rs = pst.executeQuery();
+
+                // If data is found, set the fields
+                if (rs.next()) {
+                    txt_id.setText(rs.getString("id"));
+                    txt_firstname.setText(rs.getString("first_name"));
+                    txt_surname.setText(rs.getString("surname"));
+                    txt_dob.setText(rs.getString("Dob"));
+                    txt_department.setText(rs.getString("Department"));
+                    txt_basicsalary.setText(rs.getString("Salary"));
+                } else {
+                    // Handle no data found case
+                    JOptionPane.showMessageDialog(null, "No record found with the given ID.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            } finally {
+                try {
+                    rs.close();
+                    pst.close();
+                } catch (Exception e) {
+                    // Log or handle any exceptions here
+                }
+            }
+        }
+    }//GEN-LAST:event_txt_searchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -76,7 +435,39 @@ public class UpdateSalary extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void clearFields() {
+        txt_id.setText("");
+        txt_firstname.setText("");
+        txt_surname.setText("");
+        txt_dob.setText("");
+        txt_department.setText("");
+        txt_basicsalary.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton r_amount;
+    private javax.swing.JRadioButton r_percentage;
+    private javax.swing.JTextField txt_amount;
+    private javax.swing.JTextField txt_basicsalary;
+    private javax.swing.JTextField txt_department;
+    private javax.swing.JTextField txt_dob;
+    private javax.swing.JTextField txt_firstname;
+    private javax.swing.JTextField txt_id;
+    private javax.swing.JTextField txt_percentage;
+    private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_surname;
     // End of variables declaration//GEN-END:variables
 }

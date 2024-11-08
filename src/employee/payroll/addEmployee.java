@@ -37,7 +37,7 @@ public class addEmployee extends javax.swing.JFrame {
      */
     public addEmployee() {
         initComponents();
-        conn=db.java_db();
+        conn = db.java_db();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         //setSize(new Dimension(1500, 1000));
@@ -775,6 +775,22 @@ public class addEmployee extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Record Updated");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        try {
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            byte [] image = new byte[(int) file.length()];
+            fis.read(image);
+            
+            String sqlImage = "UPDATE staff_information SET image = ? WHERE id = ?";
+            pst = conn.prepareStatement(sqlImage);
+            pst.setBytes(1, image); // Set image bytes
+            pst.setString(2, txt_id.getText()); // Set the ID for the WHERE clause
+
+            pst.executeUpdate();
+            pst.close();
+        } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         } finally {
             try {
