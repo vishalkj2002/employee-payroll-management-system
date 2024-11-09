@@ -100,7 +100,7 @@ public class addEmployee extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         txt_id.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
@@ -217,7 +217,7 @@ public class addEmployee extends javax.swing.JFrame {
         });
 
         jLabel17.setFont(new java.awt.Font("Cascadia Code", 0, 48)); // NOI18N
-        jLabel17.setText("Add Employee Record");
+        jLabel17.setText("Employee Records");
 
         jLabel18.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
         jLabel18.setText("Gender:");
@@ -383,16 +383,16 @@ public class addEmployee extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
-                .addGap(481, 481, 481)
+                .addGap(526, 526, 526)
                 .addComponent(jLabel17)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel17)
-                .addGap(25, 25, 25)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

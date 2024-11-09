@@ -97,7 +97,7 @@ public class deductions extends javax.swing.JFrame {
 
         lbl_empName.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 48)); // NOI18N

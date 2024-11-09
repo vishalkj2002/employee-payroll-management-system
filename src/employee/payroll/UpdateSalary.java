@@ -77,7 +77,7 @@ public class UpdateSalary extends javax.swing.JFrame {
         txt_amount = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 48)); // NOI18N

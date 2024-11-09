@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.Calendar;
 import java.util.Date;
@@ -210,6 +212,23 @@ public class login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Success");
                     MainMenu j = new MainMenu();
                     j.setVisible(true);
+                    this.dispose();
+                    
+                    Date currentDate = GregorianCalendar.getInstance().getTime();
+                    DateFormat df = DateFormat.getDateInstance();
+                    String dateString = df.format(currentDate);
+
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String timeString = sdf.format(d);
+
+                    String value0 = timeString;
+                    String values = dateString;
+                    
+                    int value = Emp.empId;
+                    String reg = "insert into Audit (emp_id,date,status) values ('"+value+"','"+value0+" / "+values+"','Logged in')";
+                    pst = connection.prepareStatement(reg);
+                    pst.execute();
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Username and Password you entered are wrong!");
