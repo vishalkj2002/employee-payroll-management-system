@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/MainMenu.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/deductions.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/Allowance.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/Emp.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/EmployeePayrollManagementSystem.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/addEmployee.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/login.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/UpdateSalary.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/searchEmpSalary.java</file>
-            <file>file:/C:/Users/vishal/Documents/Projects/employee-payroll-management-system/src/employee/payroll/Audit.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -540,17 +540,19 @@ public class addEmployee extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
         try {
-            // Query to get staff members who are not in the users table
-            String sq = "SELECT * FROM staff_information WHERE id NOT IN (SELECT id FROM users)";
+            // After successfully inserting staff record
+            // Query to get the most recently added staff member who is not in the users table
+            String sq = "SELECT * FROM staff_information WHERE id = ? AND id NOT IN (SELECT id FROM users)";
             pst = conn.prepareStatement(sq);
+            pst.setInt(1, Integer.parseInt(txt_id.getText())); // Use the ID of the just-added employee
             rs = pst.executeQuery();
 
-            // Loop through each staff record found
-            while (rs.next()) {
-                String empId = rs.getString("id");          // Employee ID
-                String firstName = rs.getString("first_name"); // First Name
-                String dob = rs.getString("Dob");           // Date of Birth
-                String department = rs.getString("Department"); // Department
+            // Check if the current employee is not already in users table
+            if (rs.next()) {
+                String empId = rs.getString("id");
+                String firstName = rs.getString("first_name");
+                String dob = rs.getString("Dob");
+                String department = rs.getString("Department");
 
                 // Remove slashes from dob to create password
                 String password = dob.replace("/", "");
@@ -558,10 +560,10 @@ public class addEmployee extends javax.swing.JFrame {
                 // Insert into users table
                 String sql = "INSERT INTO users (division, username, password, emp_id) VALUES (?, ?, ?, ?)";
                 try (PreparedStatement insertPst = conn.prepareStatement(sql)) {
-                    insertPst.setString(1, department);    // Division
-                    insertPst.setString(2, firstName);     // Username
-                    insertPst.setString(3, password);      // Password
-                    insertPst.setString(4, empId);         // Employee ID
+                    insertPst.setString(1, department);
+                    insertPst.setString(2, firstName);
+                    insertPst.setString(3, password);
+                    insertPst.setString(4, empId);
 
                     insertPst.executeUpdate();
                 }
